@@ -4,6 +4,7 @@
 ERROR=1
 SUCCESS=2
 NOTICE=3
+OTHER=4
 # Helper function that prints with color
 function echo_color() {
   echo "$(tput setaf $1)$2$(tput sgr0)"
@@ -159,14 +160,16 @@ function install_heroku_toolbelt {
 function install_mysql {
   os=$(os)
   check_mysql=$(mysql --version)
-  if [[ $check_mysql != *""* ]]; then
+  if [[ $check_mysql != *"command not found"* ]]; then
     echo_color $ERROR
   fi
   if [ $os == "0" ]; then
     brew install mysql
+    mysql_secure_installation
+    ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
+    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
   else
     sudo apt-get install mysql-server mysql-client libmysqlclient-dev
-    # gem install mysql2
   fi
 }
 
@@ -191,11 +194,15 @@ read input
 if [[ $input == 'y' ]]; then
   install_pip
   install_django
+else
+  echo_color $OTHER "pip and django were not installed"
 fi
 echo_color $NOTICE "Install Heroku Toolbelt? (y/n)"
 read input
 if [[ $input == 'y' ]]; then
   install_heroku_toolbelt
+else
+  echo_color $OTHER "Heroku Toolbelt was not installed"
 fi
 echo_color $NOTICE "Install ruby-related stuff (rvm/rbenv, rails)? (y/n)"
 read input
@@ -209,14 +216,21 @@ if [[ $input == 'y' ]]; then
     install_rvm
   fi
   install_rails
+else
+  echo_color $OTHER "Ruby stuff was not installed"
 fi
 echo_color $NOTICE "Install Postgres? (y/n)"
 read input
 if [[ $input == 'y' ]]; then
   install_psql
+else
+  echo_color $OTHER "Postgres was not installed"
 fi
 echo_color $NOTICE "Install MySQL? (y/n)"
 read input
 if [[ $input == 'y' ]]; then
   install_mysql
+else
+  echo_color $OTHER "MySQL was not installed"
 fi
+echo_color $SUCCESS "Done installing everything!"
