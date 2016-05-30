@@ -1,0 +1,6 @@
+{
+  "name": "Development Environment Setup",
+  "tagline": "A quick setup script to help newcomers install git, brew, psql, django, heroku toolbelt, and more!",
+  "body": "# Development Environment Setup\r\n\r\nThis script helps people set up their Terminal for development.\r\n\r\nInstalls:\r\n- git\r\n- Homebrew (Mac only)\r\n- Heroku Toolbelt\r\n- pip/Django\r\n- rbenv/rvm/Rails\r\n- Postgres\r\n- MySQL\r\n\r\n# Why\r\n\r\nI created this project because I looked for really simple scripts that installed a lot of common developer tools all at once, for all operating systems. I couldn't find something that satisfied all of my requirements, so I created one.\r\n\r\n# Todo:\r\n\r\n- Support non-Debian based Linux systems\r\n- Shoot me an [email](mailto:sameet.sapra@gmail.com), or better yet, post an issue, if you'd like to see more added or if there's a bug on your environment!",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
