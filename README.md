@@ -1,8 +1,8 @@
-# Development Environment Setup
+# Enviguration - Set up your environment *painlessly.*
 
 This script helps people set up their Terminal for development.
 
-Installs:
+Packages it installs:
 - git
 - Homebrew (Mac only)
 - Heroku Toolbelt
@@ -13,7 +13,7 @@ Installs:
 
 # Why
 
-I created this project because I looked for really simple scripts that installed a lot of common developer tools all at once, for all operating systems. I couldn't find something that satisfied all of my requirements, so I created one.
+I created this project because I've looked everywhere for really simple scripts that install a lot of common developer tools all at once, for Mac and Linux. I couldn't find something that satisfied all of my requirements, so I created one.
 
 Shoot me an [email](mailto:sameet.sapra@gmail.com), or better yet, file an issue if you'd like to see more added or if there's a bug on your environemnt!
 
