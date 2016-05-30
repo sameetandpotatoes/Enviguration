@@ -53,7 +53,6 @@ function install_rvm {
 
 function install_rails {
   echo_color $NOTICE "Installing Rails"
-  gem update
   gem install bundler
   gem install rails
   echo_color $SUCCESS "Rails installed"
