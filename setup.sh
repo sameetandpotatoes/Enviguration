@@ -27,6 +27,7 @@ function install_rbenv {
     else
       # TODO for ubuntu desktop bash_profile with bashrc
       sudo apt-get install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev
+      sudo apt-get install ruby
       cd
       git clone git://github.com/sstephenson/rbenv.git .rbenv
       echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
@@ -49,6 +50,11 @@ function install_rvm {
     return
   }
   echo_color $ERROR "rvm already installed"
+  
+  os=$(os)
+  if [ $os == "1" ]; then
+    sudo apt-get install ruby
+  fi
 }
 
 function install_rails {
