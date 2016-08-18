@@ -77,6 +77,7 @@ function install_git {
 function install_brew {
   os=$(os)
   if [ $os != "0" ]; then # If Linux exit
+    sudo apt-get update
     return
   fi
   command -v brew >/dev/null 2>&1 || {
@@ -127,9 +128,6 @@ function install_pip {
 function install_django {
   echo_color $NOTICE "Installing django"
   pip install Django
-  if [[ $os == "1" ]]; then
-    sudo apt install python-django-common
-  fi
   echo_color $SUCCESS "Django installation finished (check for errors though)"
   return
 }
