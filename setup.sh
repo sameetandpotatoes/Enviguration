@@ -100,10 +100,11 @@ function install_brew {
 function install_psql {
   os=$(os)
   command -v psql >/dev/null 2>&1 || {
-    echo "Installing Postgres ..."
+    echo_color $NOTICE "Installing Postgres ..."
     if [[ $os == "0" ]]; then
       brew install psql
     else
+      echo_color $NOTICE "Make sure that the role/user you create is the same name as the name on your computer!"
       sudo apt-get install postgresql postgresql-contrib
       service postgresql start
       createuser --interactive
@@ -123,6 +124,7 @@ function install_pip {
       brew install python
     else
       sudo apt-get install python-pip
+      sudo apt-get install python-dev
     fi
     echo_color $SUCCESS "pip installed"
     return
@@ -131,10 +133,12 @@ function install_pip {
 }
 
 # Install Django.
-function install_django {
-  echo_color $NOTICE "Installing django"
+function install_py_frameworks {
+  echo_color $NOTICE "Installing python frameworks"
   pip install Django
-  echo_color $SUCCESS "Django installation finished (check for errors though)"
+  pip install virtualenv
+  pip install Flask
+  echo_color $SUCCESS "Python framework installation finished (check for errors though)"
   return
 }
 
@@ -185,11 +189,11 @@ echo_color $NOTICE "Starting to install ... be prepared to enter your password i
 install_git
 install_brew
 # Python stuff
-echo_color $NOTICE "Install pip and django? [y/n]"
+echo_color $NOTICE "Install pip and python frameworks? [y/n]"
 read input
 if [[ $input == 'y' ]]; then
   install_pip
-  install_django
+  install_py_frameworks
 else
   echo_color $OTHER "pip and django were not installed"
 fi

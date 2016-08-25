@@ -1,4 +1,4 @@
-# Enviguration - Set up your environment *painlessly.*
+# Enviguration - Set up your environment 
 
 This script helps people set up their Terminal for development.
 
@@ -6,10 +6,15 @@ Packages it installs:
 - git
 - Homebrew (Mac only)
 - Heroku Toolbelt
-- pip/Django
+- pip/Django/Flask
 - rbenv/rvm/Rails
 - Postgres
 - MySQL
+
+# Installation Instructions
+
+If you don't have git, download and unzip: https://github.com/sameetandpotatoes/Enviguration/archive/master.zip
+Then from the Terminal, run `sudo setup.sh`
 
 **Important**: It is essential that you run this script with sudo privileges. In other words `sudo ./setup.sh` and not just `./setup.sh`.
 
