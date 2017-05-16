@@ -25,18 +25,15 @@ function install_rbenv {
     if [ $os == "0" ]; then
       brew install rbenv
     else
-      # TODO for ubuntu desktop bash_profile with bashrc
-      sudo apt-get install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev
-      sudo apt-get install ruby
-      cd
-      git clone git://github.com/sstephenson/rbenv.git .rbenv
-      echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
-      echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
-
-      git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
-      echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bash_profile
-      source ~/.bash_profile
+      sudo apt-get install autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm3 libgdbm-dev
+      git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+      echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc (~/.profile / ~/.zshrc)
+      echo 'eval "$(rbenv init -)"' >> ~/.bashrc (~/.profile / ~/.zshrc)
+      source ~/.bashrc (~/.profile / ~/.zshrc)
+      git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
     fi
+    rbenv install 2.3.1
+    rbenv global 2.3.1
     return
   }
   echo_color $ERROR "rbenv already installed"
@@ -123,8 +120,7 @@ function install_pip {
     if [[ $os == "0" ]]; then
       brew install python
     else
-      sudo apt-get install python-pip
-      sudo apt-get install python-dev
+      sudo apt install python-pip
     fi
     echo_color $SUCCESS "pip installed"
     return
@@ -164,7 +160,9 @@ function install_mysql {
       ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
       launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
     else
-      sudo apt-get install mysql-server mysql-client libmysqlclient-dev
+      sudo apt install mysql-server
+      sudo apt install libmysqlclient-dev
+      sudo mysqld --initialize
     fi
     echo_color $SUCCESS "MySQL installed"
     return
